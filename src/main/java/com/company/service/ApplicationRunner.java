@@ -1,6 +1,8 @@
 package com.company.service;
 
 import com.company.model.User;
+import com.company.model.UserDetails;
+import com.company.repository.UserDetailsRepository;
 import com.company.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,6 +19,8 @@ public class ApplicationRunner {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private UserDetailsRepository userDetailsRepository;
 
     @Transactional
     public void save() {
@@ -36,22 +40,37 @@ public class ApplicationRunner {
         userRepository.save(user_1);
 
 
+        user_1.setUsername("tel-ran");
+
         userRepository.save(user_2);
 
         System.out.println(user_1);
         System.out.println(user_2);
+
+        UserDetails userDetails = UserDetails.builder()
+                .user(user_1)
+                .city("Rehovot")
+                .country("Israel")
+                .build();
+
+        userDetailsRepository.save(userDetails);
+
+        UserDetails userDetails1 = userDetailsRepository.getByUserId(1);
+        System.out.println(userDetails1);
     }
 
     @Transactional
     public void updateUser() {
-        User user_1 = userRepository.findById(1);
-        user_1.setFirstName("David");
-        user_1.setLastName("Davids");
-        user_1.setUsername("david_davids");
+        //todo COMMENT THIS OUT TO SEE HOW IT WORKS
 
-        userRepository.update(user_1);
+//        User user_1 = userRepository.findById(1);
+//        user_1.setFirstName("David");
+//        user_1.setLastName("Davids");
+//        user_1.setUsername("david_davids");
 
-        System.out.println(user_1);
+//        userRepository.update(user_1);
+
+//        System.out.println(user_1);
     }
 
     @Transactional

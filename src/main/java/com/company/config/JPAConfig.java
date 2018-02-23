@@ -33,17 +33,17 @@ public class JPAConfig {
     }
 
     @Bean
-    public DataSource dataSource(){
+    public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost:3306/jpa_demo");
-        dataSource.setUsername( "root" );
-        dataSource.setPassword( "r00t" );
+        dataSource.setUsername("root");
+        dataSource.setPassword("r00t");
         return dataSource;
     }
 
     @Bean
-    public PlatformTransactionManager transactionManager(EntityManagerFactory emf){
+    public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(emf);
 
@@ -51,7 +51,7 @@ public class JPAConfig {
     }
 
     @Bean
-    public PersistenceExceptionTranslationPostProcessor exceptionTranslation(){
+    public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
         return new PersistenceExceptionTranslationPostProcessor();
     }
 

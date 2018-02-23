@@ -32,4 +32,8 @@ public class UserRepository {
     public List<User> findAll() {
         return entityManager.createQuery("from User u").getResultList();
     }
+
+    public void deleteUser(User user) {
+        entityManager.remove(user);
+    }
 }
